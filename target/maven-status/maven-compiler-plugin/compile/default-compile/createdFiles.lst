@@ -1,0 +1,4 @@
+com\mycompany\crudmysql\Conexao.class
+com\mycompany\crudmysql\CRUDMysql.class
+com\mycompany\crudmysql\Aluno.class
+com\mycompany\crudmysql\AlunoDAO.class
