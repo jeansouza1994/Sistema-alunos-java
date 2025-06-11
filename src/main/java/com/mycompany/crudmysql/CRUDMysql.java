@@ -80,6 +80,7 @@ public class CRUDMysql {
                         System.out.println("2 - Total de alunas (gênero feminino) com nota final acima de 7");
                         System.out.println("3 - Notas de todos os alunos e a média geral da turma");
                         System.out.println("0 - Sair");
+                        System.out.print("Escolha uma opção: ");
                         opcaorelatorio = scanner.nextInt();
                         scanner.nextLine(); // limpar buffer
 
@@ -105,14 +106,18 @@ public class CRUDMysql {
                                 }
                                 break;
                             case 3:
-                                List<Aluno> alunosrelatorio3 = dao.relatorioNotaFinalTodosAlunosEMediaTurma();
+                                RelatorioTurma relatorio = dao.relatorioNotaFinalTodosAlunosEMediaTurma();
 
-                                if (alunosrelatorio3.isEmpty()) {
+                                List<Aluno> alunosRelatorio = relatorio.getAlunos();
+
+                                if (alunosRelatorio.isEmpty()) {
                                     System.out.println("Nenhum relatório encontrado.");
                                 } else {
-                                    alunosrelatorio3.forEach(System.out::println);
+                                    alunosRelatorio.forEach(System.out::println);
+                                    System.out.printf("Média geral da turma: %.2f%n", relatorio.getMediaTurma());
                                 }
                                 break;
+
                         }
 
                     } while (opcaorelatorio != 0);

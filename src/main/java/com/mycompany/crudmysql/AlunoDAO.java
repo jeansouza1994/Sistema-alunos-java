@@ -93,7 +93,7 @@ public class AlunoDAO {
 
     public List<Aluno> relatorioNotaFinalSuperior7() {
         List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM alunos";
+        String sql = "SELECT * FROM alunos WHERE notafinal > 7";
         try (Connection conn = Conexao.getConexao();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -115,7 +115,7 @@ public class AlunoDAO {
 
     public List<Aluno> relatorioFemininoNotaFinalSuperior7() {
         List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM alunos";
+        String sql = "SELECT * FROM alunos WHERE genero = 2 AND notafinal > 7";
         try (Connection conn = Conexao.getConexao();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -135,25 +135,8 @@ public class AlunoDAO {
         return alunos;
     }
 
-    public List<Aluno> relatorioNotaFinalTodosAlunosEMediaTurma() {
-        List<Aluno> alunos = new ArrayList<>();
-        String sql = "SELECT * FROM alunos";
-        try (Connection conn = Conexao.getConexao();
-             Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery(sql)) {
-            while (rs.next()) {
-                Aluno aluno = new Aluno(rs.getInt("id"),
-                        rs.getString("nome"),
-                        rs.getDouble("simulado1"),
-                        rs.getDouble("simulado2"),
-                        rs.getDouble("av"),
-                        rs.getInt("genero"),
-                        rs.getDouble("notafinal"));
-                alunos.add(aluno);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return alunos;
+    public RelatorioTurma relatorioNotaFinalTodosAlunosEMediaTurma() {
+
     }
+
 }
