@@ -136,6 +136,34 @@ public class AlunoDAO {
     }
 
     public RelatorioTurma relatorioNotaFinalTodosAlunosEMediaTurma() {
+            List<Aluno> alunos = new ArrayList<>();
+            double somaNotas = 0.0;
+            int totalAlunos = 0;
+
+            String sql = "SELECT * FROM alunos";
+            try (Connection conn = Conexao.getConexao();
+                 Statement stmt = conn.createStatement();
+                 ResultSet rs = stmt.executeQuery(sql)) {
+
+                while (rs.next()) {
+                    Aluno aluno = new Aluno(rs.getInt("id"),
+                            rs.getString("nome"),
+                            rs.getDouble("simulado1"),
+                            rs.getDouble("simulado2"),
+                            rs.getDouble("av"),
+                            rs.getInt("genero"),
+                            rs.getDouble("notafinal"));
+
+                    alunos.add(aluno);
+                    somaNotas += rs.getDouble("notafinal");
+                    totalAlunos++;
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+            double mediaTurma = totalAlunos > 0 ? somaNotas / totalAlunos : 0.0;
+            return new RelatorioTurma(alunos, mediaTurma);
 
     }
 
