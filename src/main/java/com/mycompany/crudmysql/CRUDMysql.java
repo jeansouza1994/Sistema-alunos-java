@@ -32,14 +32,53 @@ public class CRUDMysql {
                     System.out.print("Nome do aluno: ");
                     String nome = scanner.nextLine();
 
-                    System.out.print("Nota Simulado 1: ");
-                    double simulado1 = Double.parseDouble(scanner.nextLine());
+                    double simulado1;
+                    while (true) {
+                        System.out.print("Digite a nota do Simulado 1 (entre 0 e 1): ");
+                        try {
+                            String entrada = scanner.nextLine().replace(",", ".");
+                            simulado1 = Double.parseDouble(entrada);
+                            if (simulado1 >= 0 && simulado1 <= 1) {
+                                break;
+                            } else {
+                                System.out.println("Valor inválido! Digite um número entre 0 e 1.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite um número decimal (ex: 0.5).");
+                        }
+                    }
 
-                    System.out.print("Nota Simulado 2: ");
-                    double simulado2 = Double.parseDouble(scanner.nextLine());
+                    double simulado2;
+                    while (true) {
+                        System.out.print("Digite a nota do Simulado 2 (entre 0 e 1): ");
+                        try {
+                            String entrada = scanner.nextLine().replace(",", ".");
+                            simulado2 = Double.parseDouble(entrada);
+                            if (simulado2 >= 0 && simulado2 <= 1) {
+                                break;
+                            } else {
+                                System.out.println("Valor inválido! Digite um número entre 0 e 1.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite um número decimal (ex: 0.5).");
+                        }
+                    }
 
-                    System.out.print("Nota AV: ");
-                    double av = Double.parseDouble(scanner.nextLine());
+
+                    double av;
+                    while (true) {
+                        System.out.print("Nota AV (entre 0 e 10): ");
+                        try {
+                            av = Double.parseDouble(scanner.nextLine());
+                            if (av >= 0 && av <= 10) {
+                                break;
+                            } else {
+                                System.out.println("Valor inválido! A nota AV deve estar entre 0 e 10.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Entrada inválida! Digite um número válido.");
+                        }
+                    }
 
                     System.out.print("Genero - 1: Masculino ou 2: Feminino: ");
                     Integer genero = Integer.valueOf(scanner.nextLine());
